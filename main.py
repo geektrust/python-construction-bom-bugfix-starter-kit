@@ -1,6 +1,9 @@
+from house_estimator import HouseEstimator
+
+
 class Main:
 
-    estimator = None
+    estimator = HouseEstimator()
 
     @staticmethod
     def main(args):

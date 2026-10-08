@@ -23,20 +23,16 @@ class HouseEstimator:
 
     def calculate_total_cost(self):
 
-        material_costs = {}
+        total = 0
 
         for component in self.components:
 
+            component_cost = 0
+
             for material in component.get_materials():
+                component_cost += material.quantity * material.cost_per_unit
 
-                cost = material.quantity * material.cost_per_unit
-
-                material_costs[material.name] = cost
-
-        total = 0
-
-        for cost in material_costs.values():
-            total += cost
+            total = component_cost
 
         return total
 
@@ -50,7 +46,7 @@ class Material:
     def __init__(self, name, quantity, cost_per_unit):
         self.name = name
         self.quantity = quantity
-        self.cost_per_unit = quantity
+        self.cost_per_unit = cost_per_unit
 
 
 class Component:
@@ -107,14 +103,14 @@ class Roof(Component):
             Material(
                 "Cement",
                 8 * self.quantity,
-                12
+                10
             )
         )
 
         materials.append(
             Material(
                 "Steel",
-                20 + self.quantity,
+                20 * self.quantity,
                 15
             )
         )
@@ -142,7 +138,7 @@ class Floor(Component):
         materials.append(
             Material(
                 "Sand",
-                50 * self.quantity,
+                50 + self.quantity,
                 1
             )
         )
